@@ -33,8 +33,122 @@ By default, new data is stored in the hot tier. Any object that isn't accessed f
 # Static website hosting feature of Azure Blob Storage.
 # Check Your Storage Account Type
 If the option is completely missing even after searching, your storage account configuration might not support it.
-## Hierarchical Namespace (ADLS Gen2): If you enabled Hierarchical Namespace (Azure Data Lake Storage Gen2) during creation, the static website feature is disabled by default. 
-## Account Kind: Static websites require a standard General-purpose v2 storage account or a premium BlockBlobStorage account. Legacy v1 accounts do not support this feature.
+## Hierarchical Namespace (ADLS Gen2): 
+If you enabled Hierarchical Namespace (Azure Data Lake Storage Gen2) during creation, the static website feature is disabled by default. 
+## Account Kind: 
+Static websites require a standard General-purpose v2 storage account or a premium BlockBlobStorage account. Legacy v1 accounts do not support this feature.
+
+# Static web page
+### Install the Azure SWA Tool
+Install node.js
+npm install -g @azure/static-web-apps-cli
+mkdir website/app
+nano website/app/index.html
+cd website 
+swa deploy ./ --env production --deployment-token "<PASTE_YOUR_TOKEN_HERE>"   ###(Overview -> "Manage deployment token".)
+
+index.html
+
+``` <!DOCTYPE html>
+<html>
+<head>
+    <title>My Static Site</title>
+</head>
+<body>
+    <h1>Welcome to My Website</h1>
+    <!-- Display the image directly from your Azure Blob Storage -->
+    <img src="https://<mystorageaccount>.blob.core.windows.net/images/logo.png" alt="My Logo">
+</body>
+</html> ```
+
+### SAS
+Securing private files using SAS Tokens (Shared Access Signatures) so only logged-in users can see them.
+## Azure Queue Storage
+queue a name : order-processing-queue ( because in program we will that )
+
+Security + networking -> Access keys. -> Connection string 
+
+### install
+## node.js installation
+
+# Download and install nvm:
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.41.0/install.sh | bash
+
+# in lieu of restarting the shell
+\. "$HOME/.nvm/nvm.sh"
+
+# Download and install Node.js:
+nvm install 26
+
+sudo apt install -y libatomic1
+
+# Verify the Node.js version:
+node -v # Should print "v26.13.1".
+
+# Verify npm version:
+npm -v # Should print "11.20.0".
+
+
+
+pip install azure-storage-queue ( in virtual environment)
+
+```from azure.storage.queue import QueueClient
+
+# 1. Connect to your queue
+connection_string = "PASTE_YOUR_CONNECTION_STRING_HERE"
+queue_name = "order-processing-queue"
+queue_client = QueueClient.from_connection_string(connection_string, queue_name)
+
+# 2. SEND a message to the queue (e.g., a new order id)
+print("Sending message...")
+queue_client.send_message("Order #10423")
+
+# 3. RECEIVE messages from the queue
+# This makes the message invisible to other workers for a short time
+messages = queue_client.receive_messages()
+
+for message in messages:
+    print(f"Processing: {message.content}")
+    
+    # 4. DELETE the message when finished so it's not processed twice
+    queue_client.delete_message(message)
+    print("Message processed and removed.")
+```
+
+
+# Azure Table Storage
+Enter a table name : CustomerProfiles
+pip install azure-data-tables
+``` from azure.data.tables import TableClient
+
+# 1. Connect to your table
+connection_string = "PASTE_YOUR_CONNECTION_STRING_HERE"
+table_name = "CustomerProfiles"
+table_client = TableClient.from_connection_string(connection_string, table_name)
+
+# 2. Define your entity (Row)
+# PartitionKey and RowKey are MANDATORY
+customer = {
+    "PartitionKey": "US_Customers",
+    "RowKey": "customer_id_9812",
+    "FirstName": "Jane",
+    "LastName": "Doe",
+    "Email": "jane.doe@example.com",
+    "Age": 29
+}
+
+# 3. INSERT data into the table
+print("Inserting data...")
+table_client.create_entity(entity=customer)
+
+# 4. READ data back using PartitionKey and RowKey
+retrieved_customer = table_client.get_entity(partition_key="US_Customers", row_key="customer_id_9812")
+print(f"Found Customer: {retrieved_customer['FirstName']} {retrieved_customer['LastName']}")```
+
+
+    • PartitionKey: Group related items together. For example, use a country code (US, IN, UK) or a category name.
+    • RowKey: Make it completely unique within that group, such as an email address, a GUID, or a timestamp.
+
 
 ### npm install -g @azure/static-web-apps-cli
 ### swa deploy ./ --env production --deployment-token "<PASTE_YOUR_TOKEN_HERE>"
