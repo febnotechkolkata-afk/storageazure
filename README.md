@@ -35,3 +35,6 @@ By default, new data is stored in the hot tier. Any object that isn't accessed f
 If the option is completely missing even after searching, your storage account configuration might not support it.
 ## Hierarchical Namespace (ADLS Gen2): If you enabled Hierarchical Namespace (Azure Data Lake Storage Gen2) during creation, the static website feature is disabled by default. 
 ## Account Kind: Static websites require a standard General-purpose v2 storage account or a premium BlockBlobStorage account. Legacy v1 accounts do not support this feature.
+
+### npm install -g @azure/static-web-apps-cli
+### swa deploy ./ --env production --deployment-token "<PASTE_YOUR_TOKEN_HERE>"
