@@ -87,21 +87,21 @@ Security + networking -> Access keys. -> Connection string
 ### install
 ## node.js installation
 
-# Download and install nvm:
+### Download and install nvm:
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.41.0/install.sh | bash
 
-# in lieu of restarting the shell
+### in lieu of restarting the shell
 \. "$HOME/.nvm/nvm.sh"
 
-# Download and install Node.js:
+### Download and install Node.js:
 nvm install 26
 
 sudo apt install -y libatomic1
 
-# Verify the Node.js version:
+### Verify the Node.js version:
 node -v # Should print "v26.13.1".
 
-# Verify npm version:
+### Verify npm version:
 npm -v # Should print "11.20.0".
 
 ## How to install python virtual environment in ubuntu
