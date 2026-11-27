@@ -116,7 +116,8 @@ npm -v # Should print "11.20.0".
 
 pip install azure-storage-queue ( in virtual environment)
 
-```  from azure.storage.queue import QueueClient
+```
+from azure.storage.queue import QueueClient
 
 # 1. Connect to your queue
 connection_string = "PASTE_YOUR_CONNECTION_STRING_HERE"
