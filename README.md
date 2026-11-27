@@ -105,7 +105,8 @@ node -v # Should print "v26.13.1".
 npm -v # Should print "11.20.0".   
 
 ## How to install python virtual environment in ubuntu
-```  sudo apt update
+```
+     sudo apt update
      sudo apt install python3-venv
      cd /path/to/your/project
      python3 -m venv .venv
@@ -144,7 +145,8 @@ for message in messages:
 # Azure Table Storage
 Enter a table name : CustomerProfiles
 pip install azure-data-tables
-``` from azure.data.tables import TableClient
+```
+from azure.data.tables import TableClient
 
 # 1. Connect to your table
 connection_string = "PASTE_YOUR_CONNECTION_STRING_HERE"
