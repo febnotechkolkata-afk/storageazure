@@ -74,7 +74,8 @@ index.html
     <!-- Display the image directly from your Azure Blob Storage -->
     <img src="https://<mystorageaccount>.blob.core.windows.net/images/logo.png" alt="My Logo">
 </body>
-</html> ```
+</html>
+```
 
 ### SAS
 Securing private files using SAS Tokens (Shared Access Signatures) so only logged-in users can see them.
