@@ -103,6 +103,14 @@ node -v # Should print "v26.13.1".
 # Verify npm version:
 npm -v # Should print "11.20.0".
 
+## How to install python virtual environment in ubuntu
+```  sudo apt update
+     sudo apt install python3-venv
+     cd /path/to/your/project
+     python3 -m venv .venv
+     source .venv/bin/activate
+```
+
 
 
 pip install azure-storage-queue ( in virtual environment)
